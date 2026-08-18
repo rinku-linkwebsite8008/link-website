@@ -601,6 +601,83 @@ ul, ol {
   100% { transform: translateY(200%); }
 }
 
+/* --- 5.5. News Section --- */
+.news {
+  padding: 90px 0 100px;
+  position: relative;
+}
+
+.news-list {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.news-item {
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background-color var(--transition-fast);
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-item:hover {
+  background-color: rgba(239, 232, 220, 0.2);
+}
+
+.news-item-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.news-date {
+  font-family: var(--font-en);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--text-tertiary);
+}
+
+.news-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: var(--accent-gold-dark);
+  background-color: var(--accent-gold-light);
+  padding: 3px 12px;
+  border-radius: var(--radius-full);
+}
+
+.news-item-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.news-item-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.news-item-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
 /* --- 6. Concept Section --- */
 .concept {
   position: relative;
@@ -796,6 +873,19 @@ ul, ol {
   font-size: 0.8rem;
   padding: 6px 14px;
   border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+}
+
+/* --- 7.5. Event Entry Section --- */
+.event-entry {
+  position: relative;
+}
+
+.event-wrapper {
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-lg);
+  padding: 64px 56px;
+  box-shadow: var(--shadow-card);
   border: 1px solid var(--border-subtle);
 }
 
@@ -1028,6 +1118,13 @@ textarea.form-control {
   line-height: 1.8;
 }
 
+.footer-license {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 6px;
+  letter-spacing: 0.04em;
+}
+
 .footer-links-group {
   display: flex;
   gap: 48px;
@@ -1155,6 +1252,14 @@ textarea.form-control {
 
   .section {
     padding: 80px 0;
+  }
+
+  .news {
+    padding: 60px 0 80px;
+  }
+
+  .news-item {
+    padding: 24px 20px;
   }
 
   .section-header {
