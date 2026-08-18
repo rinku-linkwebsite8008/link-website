@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 6. Contact Form Interactive Submission & Validation ---
+  // --- 6. Contact Form Interactive Submission & Validation (FormSubmit AJAX) ---
   const contactForm = document.getElementById('contact-form');
   const toast = document.getElementById('toast-notification');
 
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       const nameInput = document.getElementById('user-name');
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Simulate loading state
+      // Loading state
       const originalText = submitBtn.innerHTML;
       submitBtn.disabled = true;
       submitBtn.innerHTML = `
@@ -184,12 +184,39 @@ document.addEventListener('DOMContentLoaded', () => {
         <span>送信中...</span>
       `;
 
-      setTimeout(() => {
+      try {
+        const formData = new FormData(contactForm);
+        const formObject = Object.fromEntries(formData.entries());
+        // 返信先メールアドレスを自動設定
+        formObject['_replyto'] = emailInput.value.trim();
+
+        const endpoint = contactForm.getAttribute('action') || 'https://formsubmit.co/ajax/link.nexus88@gmail.com';
+
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(formObject)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok && (result.success === 'true' || result.success === true || response.status === 200)) {
+          contactForm.reset();
+          showToast('お問い合わせを受け付けました。ご入力いただいたアドレス宛に担当者よりご連絡いたします。', 6000);
+        } else {
+          const errorMsg = result.message || '送信中にエラーが発生しました。時間をおいて再度お試しください。';
+          showToast(errorMsg, 6000);
+        }
+      } catch (err) {
+        console.error('Contact form submission error:', err);
+        showToast('通信エラーが発生しました。お手数ですが link.nexus88@gmail.com まで直接ご連絡ください。', 6000);
+      } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalText;
-        contactForm.reset();
-        showToast('お問い合わせありがとうございます。担当者より折り返しご連絡いたします。', 5000);
-      }, 1200);
+      }
     });
   }
 });
