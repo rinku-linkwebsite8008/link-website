@@ -36,8 +36,10 @@
       <!-- Desktop Navigation -->
       <nav class="main-nav" aria-label="メインナビゲーション">
         <ul class="nav-list">
+          <li><a href="#news" class="nav-link">News</a></li>
           <li><a href="#concept" class="nav-link">Concept</a></li>
           <li><a href="#business" class="nav-link">Business</a></li>
+          <li><a href="#event" class="nav-link">Event</a></li>
           <li><a href="#about" class="nav-link">About</a></li>
           <li><a href="#contact" class="btn btn-primary nav-cta">Contact</a></li>
         </ul>
@@ -59,8 +61,10 @@
     <nav class="mobile-nav">
       <ul class="mobile-nav-list">
         <li><a href="#hero" class="mobile-nav-link">Top<span>トップ</span></a></li>
+        <li><a href="#news" class="mobile-nav-link">News<span>お知らせ</span></a></li>
         <li><a href="#concept" class="mobile-nav-link">Concept<span>コンセプト</span></a></li>
         <li><a href="#business" class="mobile-nav-link">Business<span>事業内容</span></a></li>
+        <li><a href="#event" class="mobile-nav-link">Event<span>イベント申込み</span></a></li>
         <li><a href="#about" class="mobile-nav-link">About Us<span>会社概要</span></a></li>
         <li><a href="#contact" class="mobile-nav-link">Contact<span>お問い合わせ</span></a></li>
       </ul>
@@ -110,10 +114,39 @@
       </div>
 
       <!-- Scroll Indicator -->
-      <a href="#concept" class="scroll-indicator" aria-label="コンセプトセクションへスクロール">
+      <a href="#news" class="scroll-indicator" aria-label="お知らせセクションへスクロール">
         <span>SCROLL</span>
         <div class="scroll-line"></div>
       </a>
+    </section>
+
+    <!-- =========================================================================
+         News Section (お知らせ)
+         ========================================================================= -->
+    <section class="section news" id="news">
+      <div class="container container-narrow">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">News</span>
+          <h2 class="section-title">お知らせ</h2>
+          <p class="section-desc">凜空（link）からの最新情報・お知らせをお届けします。</p>
+        </div>
+
+        <div class="news-list reveal-up delay-1">
+          <article class="news-item">
+            <div class="news-item-header">
+              <time class="news-date" datetime="2026-07-31">2026.07.31</time>
+              <span class="news-badge">お知らせ</span>
+            </div>
+            <div class="news-item-content">
+              <h3 class="news-item-title">旅行業登録完了のお知らせ</h3>
+              <p class="news-item-desc">
+                この度、正式に旅行業の登録が完了いたしました。<br>
+                旅行業の登録を受けた事業者のみに認められた<strong>「オリジナルの企画ツアー実施」</strong>や<strong>「交通機関・ホテルの代行手配」</strong>が正式に可能となり、安全で質の高い旅の企画・手配や、魅力的なイベント企画をお届けできる体制が整いました。
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
     <!-- =========================================================================
@@ -255,6 +288,100 @@
     </section>
 
     <!-- =========================================================================
+         4.5. Event Entry Section (イベント参加申込み)
+         ========================================================================= -->
+    <section class="section event-entry" id="event">
+      <div class="container container-narrow">
+        <div class="section-header reveal-up">
+          <span class="section-eyebrow">Event Entry</span>
+          <h2 class="section-title">イベント参加申込み</h2>
+          <p class="section-desc">SNS等でご案内しているイベントのお申込みはこちらからお願いいたします。<br>内容を確認のうえ、担当者より詳細をご案内いたします。</p>
+        </div>
+
+        <div class="contact-wrapper event-wrapper reveal-up delay-1">
+          <form class="contact-form" id="event-form" action="https://formsubmit.co/ajax/link.nexus88@gmail.com" method="POST" novalidate>
+            <!-- FormSubmit 設定用 Hidden フィールド -->
+            <input type="hidden" name="_subject" value="【凜空 公式サイト】イベント参加申込みを受け付けました">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="text" name="_honey" style="display:none">
+            
+            <!-- お名前 -->
+            <div class="form-group">
+              <label for="event-name" class="form-label">
+                お名前 <span class="form-required">必須</span>
+              </label>
+              <input type="text" id="event-name" name="お名前" class="form-control" placeholder="例：山田 凜" required>
+            </div>
+
+            <!-- メールアドレス -->
+            <div class="form-group">
+              <label for="event-email" class="form-label">
+                メールアドレス <span class="form-required">必須</span>
+              </label>
+              <input type="email" id="event-email" name="メールアドレス" class="form-control" placeholder="例：info@example.com" required>
+            </div>
+
+            <!-- お電話番号 -->
+            <div class="form-group">
+              <label for="event-tel" class="form-label">
+                お電話番号 <span class="form-required">必須</span>
+              </label>
+              <input type="tel" id="event-tel" name="お電話番号" class="form-control" placeholder="例：090-1234-5678" required>
+            </div>
+
+            <!-- 参加人数 -->
+            <div class="form-group">
+              <label for="event-participants" class="form-label">
+                参加人数 <span class="form-required">必須</span>
+              </label>
+              <select id="event-participants" name="参加人数" class="form-control" required>
+                <option value="1名">1名</option>
+                <option value="2名">2名</option>
+                <option value="3名">3名</option>
+                <option value="4名">4名</option>
+                <option value="5名以上">5名以上（メッセージ欄にご記入ください）</option>
+              </select>
+            </div>
+
+            <!-- イベント名・日程（任意） -->
+            <div class="form-group full-width">
+              <label for="event-title" class="form-label">
+                ご参加希望のイベント名・日程
+              </label>
+              <input type="text" id="event-title" name="イベント名・日程" class="form-control" placeholder="例：リトリート体験ワークショップ（8月開催分）">
+            </div>
+
+            <!-- ご質問・メッセージ -->
+            <div class="form-group full-width">
+              <label for="event-message" class="form-label">
+                ご質問・メッセージ
+              </label>
+              <textarea id="event-message" name="ご質問・メッセージ" class="form-control" placeholder="ご質問やご要望、複数名でご参加の場合の同伴者様のお名前などがございましたらご記入ください。"></textarea>
+            </div>
+
+            <!-- プライバシーポリシー同意 -->
+            <div class="form-checkbox-wrapper">
+              <input type="checkbox" id="event-privacy" required>
+              <label for="event-privacy" class="form-checkbox-label">
+                個人情報の取り扱いおよびプライバシーポリシーに同意する
+              </label>
+            </div>
+
+            <!-- 送信ボタン -->
+            <div class="form-submit-wrapper">
+              <button type="submit" class="btn btn-primary btn-submit">
+                イベントに申し込む
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
          5. About Us Section (会社概要)
          ========================================================================= -->
     <section class="section about" id="about">
@@ -300,6 +427,10 @@
               <tr>
                 <th>所在地</th>
                 <td>東京都墨田区　栃木県鹿沼市</td>
+              </tr>
+              <tr>
+                <th>旅行業登録番号</th>
+                <td>栃木県知事登録旅行業第2-769号</td>
               </tr>
               <tr>
                 <th>メール</th>
@@ -403,19 +534,20 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-logo">凜空 <span style="font-family: var(--font-en); font-size: 1.2rem; font-style: italic; color: var(--accent-gold);">link</span></div>
-          <p class="footer-tagline">時代・国境をこえて、本質的な美しさと自由を。</p>
+          <p class="footer-license">旅行業登録番号：栃木県知事登録旅行業第2-769号</p>
         </div>
 
         <div class="footer-links-group">
           <ul class="footer-nav-list">
             <li><a href="#hero" class="footer-nav-link">Top</a></li>
+            <li><a href="#news" class="footer-nav-link">News</a></li>
             <li><a href="#concept" class="footer-nav-link">Concept</a></li>
             <li><a href="#business" class="footer-nav-link">Business</a></li>
           </ul>
           <ul class="footer-nav-list">
+            <li><a href="#event" class="footer-nav-link">Event</a></li>
             <li><a href="#about" class="footer-nav-link">About Us</a></li>
             <li><a href="#contact" class="footer-nav-link">Contact</a></li>
-            <li><a href="#contact" class="footer-nav-link">Privacy Policy</a></li>
           </ul>
         </div>
       </div>

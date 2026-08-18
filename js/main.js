@@ -219,6 +219,90 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+  // --- 7. Event Entry Form Submission & Validation (FormSubmit AJAX) ---
+  const eventForm = document.getElementById('event-form');
+  if (eventForm) {
+    eventForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const nameInput = document.getElementById('event-name');
+      const emailInput = document.getElementById('event-email');
+      const telInput = document.getElementById('event-tel');
+      const privacyCheck = document.getElementById('event-privacy');
+      const submitBtn = eventForm.querySelector('.btn-submit');
+
+      // Validation
+      if (!nameInput.value.trim()) {
+        showToast('お名前を入力してください。');
+        nameInput.focus();
+        return;
+      }
+
+      if (!emailInput.value.trim() || !emailInput.checkValidity()) {
+        showToast('有効なメールアドレスを入力してください。');
+        emailInput.focus();
+        return;
+      }
+
+      if (!telInput.value.trim()) {
+        showToast('お電話番号を入力してください。');
+        telInput.focus();
+        return;
+      }
+
+      if (privacyCheck && !privacyCheck.checked) {
+        showToast('個人情報保護方針への同意が必要です。');
+        privacyCheck.focus();
+        return;
+      }
+
+      // Loading state
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite; display: inline-block;">
+          <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+          <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor"></path>
+        </svg>
+        <span>送信中...</span>
+      `;
+
+      try {
+        const formData = new FormData(eventForm);
+        const formObject = Object.fromEntries(formData.entries());
+        // 返信先メールアドレスを自動設定
+        formObject['_replyto'] = emailInput.value.trim();
+
+        const endpoint = eventForm.getAttribute('action') || 'https://formsubmit.co/ajax/link.nexus88@gmail.com';
+
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(formObject)
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok && (result.success === 'true' || result.success === true || response.status === 200)) {
+          eventForm.reset();
+          showToast('イベントへのお申込みを受け付けました。ご入力いただいたアドレス宛に担当者より詳細をご案内いたします。', 6000);
+        } else {
+          const errorMsg = result.message || '送信中にエラーが発生しました。時間をおいて再度お試しください。';
+          showToast(errorMsg, 6000);
+        }
+      } catch (err) {
+        console.error('Event form submission error:', err);
+        showToast('通信エラーが発生しました。お手数ですが link.nexus88@gmail.com まで直接ご連絡ください。', 6000);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+    });
+  }
 });
 
 // CSS Keyframes injection for spinner
